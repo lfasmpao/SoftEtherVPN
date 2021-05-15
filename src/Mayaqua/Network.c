@@ -46,8 +46,15 @@
 #define USE_STATVFS
 #include <sys/statvfs.h>'
 #else
+
 #define MAYAQUA_SUPPORTS_GETIFADDRS
+
+#ifdef __ANDROID__
+#include "ifaddrs.h"
+#else
 #include <ifaddrs.h>
+#endif
+
 #endif
 #endif
 

@@ -2594,10 +2594,16 @@ void UnixExecService(char *name, SERVICE_FUNCTION *start, SERVICE_FUNCTION *stop
 // Get whether the process with the specified pid exists
 bool UnixIsProcess(UINT pid)
 {
+#ifndef __ANDROID__
 	if (getsid((pid_t)pid) == -1)
 	{
 		return false;
 	}
+#else
+	if (syscall(__NR_getsid, (pid_t) pid) == -1) {
+		return false;
+	}
+#endif
 
 	return true;
 }

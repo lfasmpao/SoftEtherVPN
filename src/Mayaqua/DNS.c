@@ -11,6 +11,11 @@
 #else
 #include <netdb.h>
 #include <sys/socket.h>
+
+#ifdef __ANDROID__
+#include <linux/in6.h>
+#endif
+
 #endif
 
 #ifndef AI_ALL
